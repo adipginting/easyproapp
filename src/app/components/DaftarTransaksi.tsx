@@ -88,7 +88,7 @@ const DaftarTransaksi = () => {
             </div>
           ))}
       </div>
-      {count === tenants.length ? (
+      {count !== tenants.length ? (
         <div
           className="flex pt-4"
           onClick={() => {
