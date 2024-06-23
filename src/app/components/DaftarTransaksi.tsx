@@ -48,65 +48,67 @@ const DaftarTransaksi = () => {
     },
   ];
   return (
-    <div className="w-96 flex items-center flex-col">
-      <div className="flex justify-between mb-6 w-full">
-        <h1 className="font-bold">Daftar Penyewa</h1>
-        <SlidersHorizontal />
-      </div>
+    <div className="container mt-10">
+      <div className=" flex items-center flex-col">
+        <div className="flex justify-between mb-6 w-full">
+          <h1 className="font-bold">Daftar Penyewa</h1>
+          <SlidersHorizontal />
+        </div>
 
-      <div>
-        {tenants
-          .filter((_, index) => index < count)
-          .map((tenant, index) => (
-            <div className="border-black border-b-2 pb-3 pt-3">
-              <div className="flex flex-row items-center">
-                <div className="flex flex-row pr-3">
-                  <CircleUserRound />
-                </div>
-                <div className="flex flex-col pr-20">
-                  <div className="font-bold">{tenant.name}</div>
-                  <div className="flex gap-2">
-                    <Calendar />
-                    {tenant.date.toLocaleDateString("id-ID", {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                    })}
+        <div>
+          {tenants
+            .filter((_, index) => index < count)
+            .map((tenant, index) => (
+              <div className="border-black border-b-2 pb-3 pt-3" key={index}>
+                <div className="flex flex-row items-center">
+                  <div className="flex flex-row pr-3">
+                    <CircleUserRound />
                   </div>
-                </div>
-                <div className="flex flex-col">
-                  <div className="flex flex-row gap-2">
-                    <DoorClosed />
-                    {tenant.roomNumber}
+                  <div className="flex flex-col pr-20">
+                    <div className="font-bold">{tenant.name}</div>
+                    <div className="flex gap-2">
+                      <Calendar />
+                      {tenant.date.toLocaleDateString('id-ID', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                      })}
+                    </div>
                   </div>
-                  <div className="flex flex-row gap-2">
-                    <CircleCheck />
-                    {tenant.status}
+                  <div className="flex flex-col">
+                    <div className="flex flex-row gap-2">
+                      <DoorClosed />
+                      {tenant.roomNumber}
+                    </div>
+                    <div className="flex flex-row gap-2">
+                      <CircleCheck />
+                      {tenant.status}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+        </div>
+        {count !== tenants.length ? (
+          <div
+            className="flex pt-4"
+            onClick={() => {
+              setCount(tenants.length);
+            }}
+          >
+            See more ...
+          </div>
+        ) : (
+          <div
+            className="flex pt-4"
+            onClick={() => {
+              setCount(3);
+            }}
+          >
+            See less ...
+          </div>
+        )}
       </div>
-      {count !== tenants.length ? (
-        <div
-          className="flex pt-4"
-          onClick={() => {
-            setCount(tenants.length);
-          }}
-        >
-          See more ...
-        </div>
-      ) : (
-        <div
-          className="flex pt-4"
-          onClick={() => {
-            setCount(3);
-          }}
-        >
-          See less ...
-        </div>
-      )}
     </div>
   );
 };
